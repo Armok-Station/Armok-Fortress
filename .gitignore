@@ -203,6 +203,7 @@ Temporary Items
 /_maps/**/backup/
 /_maps/templates.dm
 /_maps/persistence/*
+!/_maps/persistence/0000-00-00_UTC_00.00.00
 
 #dmm palette file. You really should be using StrongDMM instead.
 *.dmm-pal
