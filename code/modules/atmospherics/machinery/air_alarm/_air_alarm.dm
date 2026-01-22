@@ -87,8 +87,12 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 	fire = 90
 	acid = 30
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/machinery/airalarm/get_save_vars()
 	return ..() - NAMEOF(src, name)
+*/
+// TGP EDIT REMOVAL END
 
 /obj/machinery/airalarm/Initialize(mapload)
 	. = ..()

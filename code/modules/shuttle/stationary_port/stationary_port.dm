@@ -17,8 +17,12 @@
 	var/initial_y = -1
 	var/initial_z = -1
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/docking_port/stationary/get_save_vars()
 	return ..() + NAMEOF(src, roundstart_template)
+*/
+// TGP EDIT REMOVAL END
 
 /obj/docking_port/stationary/Initialize(mapload)
 	. = ..()

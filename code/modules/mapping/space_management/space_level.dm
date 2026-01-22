@@ -19,3 +19,9 @@
 		SSmapping.z_trait_levels[new_traits] += list(new_z)
 
 	set_linkage(new_traits[ZTRAIT_LINKAGE])
+
+	// TGP EDIT ADDITION BEGIN
+	if(new_traits["xi"] && new_traits["yi"])
+		xi = new_traits["xi"]
+		yi = new_traits["yi"]
+	// TGP EDIT ADDITION END

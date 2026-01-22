@@ -59,8 +59,14 @@
 		return unload_orebox(closet)
 
 /obj/machinery/power/manufacturing/unloader/proc/unload_crate(obj/structure/closet/closet)
+	// TGP EDIT CHANGE BEGIN
+	/*
 	if (!closet.contents_initialized)
 		closet.contents_initialized = TRUE
+	*/
+	if(!(closet.obj_flags & CONTENTS_INITIALIZED))
+		closet.obj_flags |= CONTENTS_INITIALIZED
+	// TGP EDIT CHANGE END
 		closet.PopulateContents()
 		SEND_SIGNAL(closet, COMSIG_CLOSET_CONTENTS_INITIALIZED)
 	for(var/atom/thing as anything in closet.contents)

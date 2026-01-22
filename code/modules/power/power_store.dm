@@ -40,11 +40,15 @@
 /obj/item/stock_parts/power_store/get_cell()
 	return src
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/item/stock_parts/power_store/get_save_vars()
 	. = ..()
 	. += NAMEOF(src, charge)
 	. += NAMEOF(src, rigged)
 	return .
+*/
+// TGP EDIT REMOVAL END
 
 /obj/item/stock_parts/power_store/Initialize(mapload, override_maxcharge)
 	. = ..()

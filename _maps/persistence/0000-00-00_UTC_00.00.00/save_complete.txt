@@ -1,0 +1,16 @@
+{
+	"save_completed": 1, 
+	"timestamp": "0000-00-00 00:00:00", 
+	"total_save_time_seconds": 0.000, 
+	"z_level_metrics": [
+		{
+			"z-level": 2, 
+			"multi z-levels": 0, 
+			"save_time_seconds": 0.000
+			"mobs_saved": 0 
+			"objs_saved": 0 
+			"turfs_saved": 0 
+			"areas_saved": 0
+		}
+	]
+}

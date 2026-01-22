@@ -66,7 +66,7 @@ Always compile, always use that verb, and always make sure that it works for wha
 /// List of directories we can load map .json files from
 #define MAP_DIRECTORY_MAPS "_maps"
 #define MAP_DIRECTORY_DATA "data"
-#define MAP_DIRECTORY_WHITELIST list(MAP_DIRECTORY_MAPS,MAP_DIRECTORY_DATA)
+//#define MAP_DIRECTORY_WHITELIST list(MAP_DIRECTORY_MAPS,MAP_DIRECTORY_DATA) TGP EDIT - (Moved to _DEFINES/~tgp_defines/maps.dm)
 
 /// Special map path value for custom adminloaded stations.
 #define CUSTOM_MAP_PATH "custom"

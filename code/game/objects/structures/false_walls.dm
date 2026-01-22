@@ -26,10 +26,14 @@
 	var/girder_type = /obj/structure/girder/displaced
 	var/opening = FALSE
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/structure/falsewall/get_save_vars()
 	. = ..()
 	. -= NAMEOF(src, icon)
 	return .
+*/
+// TGP EDIT REMOVAL END
 
 /obj/structure/falsewall/Initialize(mapload)
 	. = ..()

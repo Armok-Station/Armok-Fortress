@@ -41,8 +41,12 @@
 		become_hearing_sensitive()
 	AddElement(/datum/element/empprotection, EMP_PROTECT_ALL)
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/machinery/door/password/get_save_vars()
 	return ..() + NAMEOF(src, password)
+*/
+// TGP EDIT REMOVAL END
 
 /obj/machinery/door/password/Hear(atom/movable/speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, list/spans, list/message_mods = list(), message_range)
 	. = ..()

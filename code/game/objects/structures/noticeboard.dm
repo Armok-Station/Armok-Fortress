@@ -13,6 +13,8 @@
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/noticeboard, 32)
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/structure/noticeboard/on_object_saved()
 	var/data
 
@@ -21,6 +23,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/noticeboard, 32)
 		data += "[data ? ",\n" : ""][paper.type][metadata]"
 
 	return data
+*/
+// TGP EDIT REMOVAL END
 
 /obj/structure/noticeboard/Initialize(mapload)
 	. = ..()

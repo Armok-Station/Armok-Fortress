@@ -8,6 +8,8 @@
 
 /datum/buildmode_mode/map_export/change_settings(client/builder)
 	var/static/list/options = list(
+		// TGP EDIT CHANGE BEGIN
+		/*
 		"Object Saving" = SAVE_OBJECTS,
 		"Mob Saving" = SAVE_MOBS,
 		"Turf Saving" = SAVE_TURFS,
@@ -15,6 +17,18 @@
 		"Space Turf Saving" = SAVE_SPACE,
 		"Object Property Saving" = SAVE_OBJECT_PROPERTIES,
 		"Atmos Saving" = SAVE_ATMOS,
+		*/
+		"Object Saving" = SAVE_OBJECTS,
+		"Object Variable Saving" = SAVE_OBJECTS_VARIABLES,
+		"Object Property Saving" = SAVE_OBJECTS_PROPERTIES,
+		"Mob Saving" = SAVE_MOBS,
+		"Turf Saving" = SAVE_TURFS,
+		"Turf Atmos Saving" = SAVE_TURFS_ATMOS,
+		"Space Turf Saving" = SAVE_TURFS_SPACE,
+		"Area Saving" = SAVE_AREAS,
+		"Area Default Shuttle Saving" = SAVE_AREAS_DEFAULT_SHUTTLES,
+		"Area Custom Shuttle Saving" = SAVE_AREAS_CUSTOM_SHUTTLES,
+		// TGP EDIT CHANGE END
 	)
 	var/what_to_change = tgui_input_list(builder, "What export setting would you like to toggle?", "Map Exporter", options)
 	if (!what_to_change)

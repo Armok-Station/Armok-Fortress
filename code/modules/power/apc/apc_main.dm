@@ -153,6 +153,8 @@
 	fire = 90
 	acid = 50
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/machinery/power/apc/get_save_vars()
 	. = ..()
 	if(!auto_name)
@@ -172,6 +174,8 @@
 	//. += NAMEOF(src, shorted)
 	//. += NAMEOF(src, locked)
 	return .
+*/
+// TGP EDIT REMOVAL END
 
 /obj/machinery/power/apc/Initialize(mapload)
 	. = ..()

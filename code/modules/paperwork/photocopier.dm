@@ -118,10 +118,14 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	starting_toner = /obj/item/toner
 	starting_paper = 30
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/machinery/photocopier/get_save_vars()
 	. = ..()
 	. += NAMEOF(src, paper_stack)
 	return .
+*/
+// TGP EDIT REMOVAL END
 
 /obj/machinery/photocopier/Initialize(mapload)
 	. = ..()

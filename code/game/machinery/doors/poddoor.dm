@@ -45,8 +45,12 @@
 	fire = 100
 	acid = 70
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/machinery/door/poddoor/get_save_vars()
 	return ..() + NAMEOF(src, id)
+*/
+// TGP EDIT REMOVAL END
 
 /obj/machinery/door/poddoor/examine(mob/user)
 	. = ..()

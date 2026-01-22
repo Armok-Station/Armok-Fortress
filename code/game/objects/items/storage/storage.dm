@@ -17,7 +17,12 @@
 
 	create_storage(storage_type = storage_type)
 
-	PopulateContents()
+	// TGP EDIT CHANGE BEGIN
+	// PopulateContents()
+	if(!(obj_flags & CONTENTS_INITIALIZED))
+		obj_flags |= CONTENTS_INITIALIZED
+		PopulateContents()
+	// TGP EDIT CHANGE END
 
 /obj/item/storage/create_storage(
 	max_slots,

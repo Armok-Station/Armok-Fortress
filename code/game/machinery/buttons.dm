@@ -37,8 +37,12 @@
 	fire = 90
 	acid = 70
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/machinery/button/get_save_vars()
 	return ..() + NAMEOF(src, id)
+*/
+// TGP EDIT REMOVAL END
 
 /**
  * INITIALIZATION

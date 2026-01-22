@@ -714,8 +714,12 @@
 	/// the type of wallframe it 'disassembles' into
 	var/wallframe_type = /obj/item/wallframe/painting
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/structure/sign/painting/get_save_vars()
 	return ..() - NAMEOF(src, icon)
+*/
+// TGP EDIT REMOVAL END
 
 /obj/structure/sign/painting/Initialize(mapload)
 	. = ..()

@@ -286,6 +286,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	SSpersistence.collect_data()
 	SSpersistent_paintings.save_paintings()
 
+	// TGP EDIT ADDITION START - Persistent subsystem
+	if(CONFIG_GET(flag/persistent_save_enabled))
+		SSworld_save.save_world()
+	// TGP EDIT ADDITION END
+
 	//stop collecting feedback during grifftime
 	SSblackbox.Seal()
 

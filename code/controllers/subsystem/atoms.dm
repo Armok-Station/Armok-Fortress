@@ -15,6 +15,10 @@ SUBSYSTEM_DEF(atoms)
 
 	var/list/late_loaders = list()
 
+	// TGP EDIT ADDITION START - Persistent subsystem
+	var/list/world_save_loaders = list()
+	// TGP EDIT ADDITION END
+
 	var/list/BadInitializeCalls = list()
 
 	///initAtom() adds the atom its creating to this list iff InitializeAtoms() has been given a list to populate as an argument

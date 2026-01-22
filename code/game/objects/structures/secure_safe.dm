@@ -107,8 +107,13 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/secure_safe, 32)
 	//this will create the storage for us.
 	AddComponent(/datum/component/lockable_storage, stored_lock_code)
 	if(mapload)
-		PopulateContents()
+		// TGP EDIT CHANGE BEGIN
+		//PopulateContents()
+		if(!(obj_flags & CONTENTS_INITIALIZED))
+			PopulateContents()
+		// TGP EDIT CHANGE END
 		find_and_mount_on_atom()
+	obj_flags |= CONTENTS_INITIALIZED // TGP EDIT ADDITION
 	RegisterSignal(src, COMSIG_LOCKABLE_STORAGE_SET_CODE, PROC_REF(update_lock_code))
 
 /obj/structure/secure_safe/find_and_mount_on_atom(mark_for_late_init, late_init)

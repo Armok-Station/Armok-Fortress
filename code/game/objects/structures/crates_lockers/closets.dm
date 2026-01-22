@@ -75,8 +75,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	var/can_install_electronics = TRUE
 
 	var/is_maploaded = FALSE
-
-	var/contents_initialized = FALSE
+	//var/contents_initialized = FALSE - TGP EDIT REMOVAL
 	/// is this closet locked by an exclusive id, i.e. your own personal locker
 	var/datum/weakref/id_card = null
 	/// should we prevent further access change
@@ -109,6 +108,8 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	fire = 70
 	acid = 60
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/structure/closet/get_save_vars()
 	. = ..()
 	. += NAMEOF(src, welded)
@@ -116,6 +117,8 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	. += NAMEOF(src, locked)
 	. += NAMEOF(src, anchorable)
 	return .
+*/
+// TGP EDIT REMOVAL END
 
 /obj/structure/closet/Initialize(mapload)
 	. = ..()
@@ -506,10 +509,17 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	return TRUE
 
 /obj/structure/closet/dump_contents()
+	// TGP EDIT CHANGE BEGIN
+	/*
 	if (!contents_initialized)
 		contents_initialized = TRUE
+	*/
+	if (!(obj_flags & CONTENTS_INITIALIZED))
+		obj_flags |= CONTENTS_INITIALIZED
+	// TGP EDIT CHANGE END
 		PopulateContents()
 		SEND_SIGNAL(src, COMSIG_CLOSET_CONTENTS_INITIALIZED)
+
 
 	var/atom/L = drop_location()
 	for(var/atom/movable/AM in src)

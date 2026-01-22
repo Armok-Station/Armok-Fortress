@@ -17,8 +17,12 @@
 /obj/item/photo/grind_results()
 	return LAZYACCESS(custom_materials, /datum/material/hauntium) ? list(/datum/reagent/hauntium = 20) : list(/datum/reagent/iodine = 4)
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/item/photo/get_save_vars()
 	return ..() - NAMEOF(src, icon)
+*/
+// TGP EDIT REMOVAL END
 
 /obj/item/photo/Initialize(mapload, datum/picture/P, datum_name = TRUE, datum_desc = TRUE)
 	set_picture(P, datum_name, datum_desc, TRUE)

@@ -50,11 +50,15 @@
 	fire = 80
 	acid = 50
 
+// TGP EDIT REMOVAL BEGIN
+/*
 /obj/machinery/portable_atmospherics/canister/get_save_vars()
 	. = ..()
 	. += NAMEOF(src, valve_open)
 	. += NAMEOF(src, release_pressure)
 	return .
+*/
+// TGP EDIT REMOVAL END
 
 /obj/machinery/portable_atmospherics/canister/Initialize(mapload)
 	. = ..()
