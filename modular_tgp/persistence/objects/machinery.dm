@@ -9,6 +9,17 @@
 	. = ..()
 	update_appearance()
 
+/obj/item/circuitboard/is_saveable(turf/current_loc, list/obj_blacklist)
+	// so circuits always spawn inside machines during init so we need to skip saving them
+	// to avoid duplicating since they are apart of contents however certain circuits (ie. cargo)
+	// have hacked vars that will need special handling (save but delete the original circuit in PersistentInitialize)
+	if(istype(loc, /obj/machinery))
+		var/obj/machinery/parent_machine = loc
+		if(src == parent_machine.circuit)
+			return FALSE
+
+	return ..()
+
 /obj/machinery/camera/get_save_vars(save_flags=ALL)
 	. = ..()
 	. += NAMEOF(src, network)
