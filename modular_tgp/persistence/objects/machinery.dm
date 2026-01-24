@@ -1,67 +1,101 @@
 /obj/machinery
 	var/list/persistent_components
 
-/obj/machinery/get_custom_save_vars(save_flags=ALL) //FIXME: Fails to save cells (and maybe other items)
+/obj/machinery/get_custom_save_vars(save_flags=ALL)
 	. = ..()
 	var/obj/item/circuitboard/machine/machine_circuit = circuit
 	if(!istype(machine_circuit) || !length(machine_circuit.req_components))
 		return
+	LAZYCLEARLIST(persistent_components)
 
 	var/list/comps_to_save
 	for(var/datum/component as anything in component_parts)
-		if(!istype(component, /obj/item/stock_parts) && !istype(component, /datum/stock_part)) continue
 		if(component == machine_circuit) continue
-		if(!isnull(machine_circuit.req_components[component.type])) continue
-		if(get_tier(component) == 1) continue //ignore T1
-		LAZYADD(comps_to_save, component.type)
+
+		var/as_path = component
+		if(!ispath(component))
+			as_path = component.type
+		if(ispath(as_path, /obj/item/stack)) continue
+		if(!persistence_valid_stockpart(as_path)) continue
+		if(!isnull(machine_circuit.req_components[as_path])) continue // ignore already in req_components
+		if(!ispath(as_path, /obj/item/stock_parts/power_store) && persistence_get_tier(component) == 1) continue //ignore T1
+
+		if(ispath(as_path, /datum/stock_part))
+			var/datum/stock_part/castpath = as_path
+			as_path = initial(castpath.physical_object_type)
+		LAZYADD(comps_to_save, as_path)
 
 	if(LAZYLEN(comps_to_save))
 		.[NAMEOF(src, persistent_components)] = comps_to_save
 
 
-/obj/machinery/Initialize(mapload)
+/obj/machinery/Initialize(mapload) // literally just copied RPED code
+	. = ..()
 	if(!LAZYLEN(persistent_components) || isnull(circuit))
-		return ..()
-	if(ispath(circuit, /obj/item/circuitboard))
-		circuit = new circuit(src)
-	else
-		circuit = locate() in contents
-	var/obj/item/circuitboard/machine/machine_circuit = circuit
-	var/list/operating_parts = list()
-	for(var/key in machine_circuit.req_components)
-		operating_parts += key
-	for(var/datum/component as anything in persistent_components)
-		for(var/mach_comp in operating_parts)
-			if(get_base_stock_path(component) != get_base_stock_path(mach_comp)) continue
-			operating_parts -= mach_comp
-		if(ispath(component, /datum/stock_part))
-			persistent_components -= component
-			persistent_components += GLOB.stock_part_datums[component]
+		return
+	var/obj/item/circuitboard/machine/machine_board = locate(/obj/item/circuitboard/machine) in component_parts
+	if(isnull(machine_board))
+		return
 
+	var/list/part_list = list()
+	for(var/path in persistent_components)
+		part_list += new path()
+	for(var/primary_part_base in component_parts)
+		//we exchanged all we could time to bail
+		if(!part_list.len)
+			break
 
+		var/required_type
 
+		//we dont exchange circuitboards cause thats dumb
+		if(istype(primary_part_base, /obj/item/circuitboard))
+			continue
+		else if(istype(primary_part_base, /datum/stock_part))
+			var/datum/stock_part/primary_stock_part = primary_part_base
+			required_type = primary_stock_part.physical_object_base_type
+		else
+			var/obj/item/primary_stock_part_item = primary_part_base
+			for(var/design_type in machine_board.req_components)
+				if(!ispath(primary_stock_part_item.type, design_type)) continue
+				required_type = design_type
+				break
 
-	machine_circuit.replacement_parts = operating_parts + persistent_components //shit implementation todo
-	return ..()
+		for(var/obj/item/secondary_part in part_list)
+			if(!istype(secondary_part, required_type))
+				continue
+			if (istype(primary_part_base, /datum/stock_part))
+				var/stock_part_datum = GLOB.stock_part_datums_per_object[secondary_part.type]
+				if (isnull(stock_part_datum))
+					CRASH("[secondary_part] ([secondary_part.type]) did not have a stock part datum (was trying to find [primary_part_base])")
+				component_parts += stock_part_datum
+				part_list -= secondary_part //have to manually remove cause we are no longer refering replacer_tool.contents
+				qdel(secondary_part)
+			else
+				component_parts += secondary_part
+				secondary_part.forceMove(src)
+				part_list -= secondary_part //have to manually remove cause we are no longer refering replacer_tool.contents
 
-/obj/machinery/proc/get_tier(datum/part)
+			component_parts -= primary_part_base
+			if (!istype(primary_part_base, /datum/stock_part))
+				qdel(primary_part_base)
+			break
+
+	RefreshParts()
+	LAZYNULL(persistent_components) // free memory
+
+/obj/machinery/proc/persistence_valid_stockpart(datum/part)
 	if(!ispath(part))
 		part = part.type
+	return ispath(part, /datum/stock_part) || ispath(part, /obj/item/stock_parts)
+
+
+/obj/machinery/proc/persistence_get_tier(datum/part)
+	if(!ispath(part))
+		part = part.type
+	if(!persistence_valid_stockpart(part)) return null
 	var/datum/stock_part/as_datum = part
 	var/obj/item/stock_parts/as_item = part
-	if(!ispath(part, /datum/stock_part) && !ispath(part, /obj/item/stock_parts)) return null
 	return istype(as_datum) ? initial(as_datum.tier) : initial(as_item.rating)
-
-/obj/machinery/proc/get_base_stock_path(datum/stock_part/part)
-	if(isnull(part))
-		CRASH("get base somehow null")
-	if(!ispath(part))
-		part = part.type
-	if(ispath(part, /obj/item/stock_parts))
-		part = GLOB.stock_part_datums_per_object[part]
-	var/todo = GLOB.stock_part_datums_per_object[initial(part.physical_object_base_type)]
-	return todo
-
 
 /obj/machinery/get_save_vars(save_flags=ALL)
 	. = ..()
