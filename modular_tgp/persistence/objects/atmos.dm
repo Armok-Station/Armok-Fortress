@@ -48,7 +48,7 @@
 			else
 				color_path = "/general"
 
-		var/visible_path = hide ? "/hidden" : "/visible"
+		var/visible_path = HAS_TRAIT(src, TRAIT_UNDERFLOOR) ? "/hidden" : "/visible"
 
 		var/layer_path = ""
 		if(piping_layer != 3)
