@@ -6,10 +6,10 @@
 	. = ..()
 	. += NAMEOF(src, locked)
 
-/obj/machinery/computer/cargo/express/get_save_vars(save_flags=ALL)
-	. = ..()
-	. += NAMEOF(src, locked)
-
 /obj/machinery/computer/cargo/get_save_vars(save_flags=ALL)
 	. = ..()
 	. += NAMEOF(src, contraband)
+
+/obj/machinery/computer/cargo/express/get_save_vars(save_flags=ALL)
+	. = ..()
+	. += NAMEOF(src, locked)

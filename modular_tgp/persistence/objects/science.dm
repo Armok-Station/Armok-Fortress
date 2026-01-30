@@ -1,4 +1,4 @@
-/obj/item/disk/get_save_vars(save_flags)
+/obj/item/disk/get_save_vars(save_flags=ALL)
 	. = ..()
 	. += NAMEOF(src, icon_state)
 	. += NAMEOF(src, read_only)
@@ -6,7 +6,9 @@
 
 /obj/item/disk/get_custom_save_vars(save_flags=ALL)
 	. = ..()
-	.[NAMEOF(src, custom_description)] = copytext(custom_description, 1, min(30, length(custom_description))) //max 30 bytes len
+	if(isnull(custom_description))
+		return
+	.[NAMEOF(src, custom_description)] = copytext(custom_description, 1, 31)
 
 /obj/item/disk/tech_disk
 	var/list/persistence_unlocked_nodes
@@ -15,10 +17,7 @@
 	. = ..()
 	if(!length(stored_research.researched_nodes))
 		return
-	var/list/research = list()
-	for(var/node in stored_research.researched_nodes)
-		research += node
-	.[NAMEOF(src, persistence_unlocked_nodes)] = research
+	.[NAMEOF(src, persistence_unlocked_nodes)] = assoc_to_keys(stored_research.researched_nodes)
 
 /obj/item/disk/tech_disk/PersistentInitialize()
 	. = ..()
