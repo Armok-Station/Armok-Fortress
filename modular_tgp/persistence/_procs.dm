@@ -11,6 +11,8 @@
 	/// This is the generated id of the parent object that holds children inside
 	/// Used to link children and parent objects together during map loading
 	var/save_container_parent_id
+	/// We use this to store and retrieve any datum information on an object inside a list
+	var/list/persistent_datum_data
 
 /// A list of all parent containers storing objects inside (used via map save/load)
 GLOBAL_LIST_EMPTY(save_containers_parents)

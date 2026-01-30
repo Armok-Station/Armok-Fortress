@@ -10,19 +10,16 @@
 		return
 	.[NAMEOF(src, custom_description)] = copytext(custom_description, 1, 31)
 
-/obj/item/disk/tech_disk
-	var/list/persistence_unlocked_nodes
-
 /obj/item/disk/tech_disk/get_custom_save_vars(save_flags=ALL)
 	. = ..()
 	if(!length(stored_research.researched_nodes))
 		return
-	.[NAMEOF(src, persistence_unlocked_nodes)] = assoc_to_keys(stored_research.researched_nodes)
+	.[NAMEOF(src, persistent_datum_data)] = assoc_to_keys(stored_research.researched_nodes)
 
 /obj/item/disk/tech_disk/PersistentInitialize()
 	. = ..()
-	if(!LAZYLEN(persistence_unlocked_nodes))
+	if(!LAZYLEN(persistent_datum_data))
 		return
-	for(var/node in persistence_unlocked_nodes)
+	for(var/node in persistent_datum_data)
 		stored_research.research_node_id(node, TRUE, FALSE, FALSE)
-	persistence_unlocked_nodes = null
+	persistent_datum_data = null
