@@ -7,12 +7,20 @@
 	//Ignore not normal floors, or decals that arent the same icons as /obj/effect/turf_decal oones
 	if(. == ELEMENT_INCOMPATIBLE || !istype(as_floor) || _icon != /obj/effect/turf_decal::icon)
 		return
-	LAZYADD(as_floor.persistent_decals, list(list(icon_state = _icon_state, dir = _dir, color = _color, alpha = _alpha)))
+	LAZYSET(as_floor.persistent_decals, "[REF(src)]" ,list(icon_state = _icon_state, dir = _dir, color = _color, alpha = _alpha))
+
+/datum/element/decal/Detach(atom/source)
+	. = ..()
+	var/turf/open/floor/as_floor = source
+	if(!istype(as_floor) || !LAZYLEN(as_floor.persistent_decals))
+		return
+	LAZYREMOVE(as_floor.persistent_decals, "[REF(src)]")
 
 /turf/open/floor/on_object_saved(map_string, turf/current_loc)
 	if(!LAZYLEN(persistent_decals))
 		return FALSE
-	for(var/list/decal as anything in persistent_decals)
+	var/list/values = assoc_to_values(persistent_decals)
+	for(var/list/decal as anything in values)
 		var/list/variables = list()
 		var/obj/effect/turf_decal/typepath = /obj/effect/turf_decal // byond oh my god bruh
 		TGM_ADD_TYPEPATH_VAR(variables, typepath, icon_state, decal["icon_state"])
