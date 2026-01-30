@@ -331,7 +331,7 @@
 		break
 
 	if(isnull(pipe))
-		log_mapping("[type] at [x] [y] [z] did not find any pipe to set gas mix of")
+		log_mapping("[type] at [AREACOORD(src)] did not find any pipe to set gas mix of")
 		qdel(src)
 		return
 
