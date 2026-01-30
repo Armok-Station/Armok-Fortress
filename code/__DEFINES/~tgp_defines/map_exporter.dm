@@ -99,6 +99,12 @@
 		variables_to_add[NAMEOF(typepath, var)] = value;\
 	};
 
+//same as above but for static typepaths
+#define TGM_ADD_STATIC_TYPEPATH_VAR(variables_to_add, typepath, var, value)\
+	if(!IS_TYPEPATH_DEFAULT_VAR(typepath, var, value)) {\
+		variables_to_add[nameof(##typepath::##var)] = value;\
+	};
+
 /// Checks if a given value matches the compile-time default value of a typepath variable
 #define IS_TYPEPATH_DEFAULT_VAR(datum, variable, new_var) (##datum::variable == new_var)
 

@@ -15,6 +15,9 @@
 	. -= NAMEOF(src, id_tag)
 	return .
 
+/obj/machinery/atmospherics/pipe
+	var/persistence_pipe_id
+
 /obj/machinery/atmospherics/pipe/smart/substitute_with_typepath(map_string)
 	var/base_type = /obj/machinery/atmospherics/pipe/smart/manifold4w
 	var/cache_key = "[base_type]-[pipe_color]-[hide]-[piping_layer]"
@@ -70,19 +73,19 @@
 
 	var/obj/machinery/atmospherics/pipe/smart/manifold4w/typepath = cached_typepath
 	var/list/variables = list()
-	id_tag = parent?.members[1] == src ? assign_random_name(12, "persistencegas_") : null
 
-	TGM_ADD_TYPEPATH_VAR(variables, typepath, id_tag, id_tag)
-	TGM_MAP_BLOCK(map_string, typepath, generate_tgm_typepath_metadata(variables))
+	if(parent?.members[1] == src && !isnull(parent.air))
+		var/new_id = assign_random_name(12, "persistencegas_")
+		TGM_ADD_TYPEPATH_VAR(variables, typepath, persistence_pipe_id, new_id) //assign id to pipe
 
-	if(isnull(id_tag)) // if we werent the first pipe (above ternary failed)
-		return
-	var/obj/effect/mapping_helpers/pipe_gas/pipe_persistence_helper = /obj/effect/mapping_helpers/pipe_gas
-	variables.Cut()
+		var/list/helper_variables = list() //variables for gas mix helper
 
-	TGM_ADD_TYPEPATH_VAR(variables, pipe_persistence_helper, gas_mix, parent.air.to_string())
-	TGM_ADD_TYPEPATH_VAR(variables, pipe_persistence_helper, id_filter, id_tag)
-	TGM_MAP_BLOCK(map_string, pipe_persistence_helper, generate_tgm_typepath_metadata(variables))
+		TGM_ADD_STATIC_TYPEPATH_VAR(helper_variables, /obj/effect/mapping_helpers/pipe_gas, gas_mix, parent.air.to_string())
+		TGM_ADD_STATIC_TYPEPATH_VAR(helper_variables, /obj/effect/mapping_helpers/pipe_gas, id_filter, new_id)
+		TGM_MAP_BLOCK(map_string, /obj/effect/mapping_helpers/pipe_gas, generate_tgm_typepath_metadata(helper_variables))
+
+	TGM_MAP_BLOCK(map_string, typepath, length(variables) ? generate_tgm_typepath_metadata(variables) : null)
+
 
 // these spawn underneath cryo machines and will duplicate after every save
 /obj/machinery/atmospherics/components/unary/is_saveable(turf/current_loc, list/obj_blacklist)
@@ -322,10 +325,10 @@
 
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/mapping_helpers/pipe_gas/LateInitialize() //assign_random_name gasmix.tostring
+/obj/effect/mapping_helpers/pipe_gas/LateInitialize()
 	var/obj/machinery/atmospherics/pipe/pipe
-	for(var/obj/machinery/atmospherics/pipe/potential_pipe as anything in loc)
-		if(!isnull(id_filter) && potential_pipe.id_tag != id_filter) continue
+	for(var/obj/machinery/atmospherics/pipe/potential_pipe in loc)
+		if(!isnull(id_filter) && (potential_pipe.id_tag != id_filter || potential_pipe.persistence_pipe_id != id_filter)) continue
 		if(isnull(id_filter) && potential_pipe.piping_layer != pipe_layer) continue
 		pipe = potential_pipe
 		break
@@ -340,5 +343,7 @@
 		pipe.parent.air.copy_from(gasmix)
 	else
 		pipe.air_temporary = gasmix
+
+	pipe.persistence_pipe_id = null
 
 	qdel(src)
