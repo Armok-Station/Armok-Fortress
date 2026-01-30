@@ -95,7 +95,7 @@
 	if(!persistence_valid_stockpart(part)) return null
 	var/datum/stock_part/as_datum = part
 	var/obj/item/stock_parts/as_item = part
-	return istype(as_datum) ? initial(as_datum.tier) : initial(as_item.rating)
+	return ispath(part, /datum/stock_part) ? initial(as_datum.tier) : initial(as_item.rating)
 
 /obj/machinery/get_save_vars(save_flags=ALL)
 	. = ..()
