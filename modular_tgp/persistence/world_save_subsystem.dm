@@ -62,6 +62,9 @@ SUBSYSTEM_DEF(world_save)
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/world_save/fire(resumed = FALSE)
+#ifdef UNIT_TESTS
+	return
+#endif
 	if(!was_first_roundstart_autosave_skipped) // prevents pointless autosave at the start of the game
 		was_first_roundstart_autosave_skipped = TRUE
 		return

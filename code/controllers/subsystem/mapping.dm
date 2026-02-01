@@ -134,7 +134,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/FailedZs = list()
 	// TGP EDIT ADDITION END
 
-#ifndef LOWMEMORYMODE
+#if !defined(LOWMEMORYMODE)&&!defined(UNIT_TESTS)
 	// TGP EDIT REMOVAL BEGIN
 	/*
 	// Create space ruin levels
