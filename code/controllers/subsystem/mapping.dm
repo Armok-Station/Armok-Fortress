@@ -206,7 +206,13 @@ SUBSYSTEM_DEF(mapping)
 	// TGP EDIT ADDITION END
 
 	// Pick a random away mission.
+//tgp edit start
+#ifdef UNIT_TESTS
+	if(CONFIG_GET(flag/roundstart_away))
+#else
 	else if(CONFIG_GET(flag/roundstart_away)) // TGP EDIT - Original - if(CONFIG_GET(flag/roundstart_away))
+#endif
+//tgp edit end
 		createRandomZlevel(prob(CONFIG_GET(number/config_gateway_chance)))
 
 	else if (SSmapping.current_map.load_all_away_missions) // we're likely in a local testing environment, so punch it.
