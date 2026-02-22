@@ -1,0 +1,4 @@
+author: "timothymtorres"
+delete-after: True
+changes:
+  - rscadd: "Any held objects by parrots will drop to the floor during map save"

@@ -75,7 +75,6 @@
 /obj/item/stock_parts/power_store/get_save_vars(save_flags=ALL)
 	. = ..()
 	. += NAMEOF(src, charge)
-	. += NAMEOF(src, rigged)
 	return .
 
 /obj/machinery/power/port_gen/pacman/get_save_vars(save_flags=ALL)

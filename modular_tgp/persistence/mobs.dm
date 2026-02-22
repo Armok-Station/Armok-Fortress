@@ -42,3 +42,14 @@
 /mob/living/silicon/ai/substitute_with_typepath(map_string)
 	TGM_MAP_BLOCK(map_string, /obj/structure/ai_core/latejoin_inactive, null)
 	return /obj/structure/ai_core/latejoin_inactive
+
+/mob/living/basic/parrot/on_object_saved(map_string, turf/current_loc, list/obj_blacklist)
+	// we don't want poly to delete the object he is holding bc it could be valuable
+	if(!held_item)
+		return
+	if(!held_item.is_saveable(current_loc, obj_blacklist))
+		return
+
+	held_item.on_object_saved(map_string, current_loc, obj_blacklist)
+	var/metadata = generate_tgm_metadata(held_item)
+	TGM_MAP_BLOCK(map_string, held_item.type, metadata)

@@ -20,7 +20,8 @@
 
 /obj/machinery/atmospherics/pipe/smart/substitute_with_typepath(map_string)
 	var/base_type = /obj/machinery/atmospherics/pipe/smart/manifold4w
-	var/cache_key = "[base_type]-[pipe_color]-[hide]-[piping_layer]"
+	var/is_hidden = HAS_TRAIT(src, TRAIT_UNDERFLOOR)
+	var/cache_key = "[base_type]-[pipe_color]-[is_hidden]-[piping_layer]"
 	if(isnull(GLOB.map_export_typepath_cache[cache_key]))
 		var/color_path = ""
 		switch(pipe_color)
@@ -51,7 +52,7 @@
 			else
 				color_path = "/general"
 
-		var/visible_path = HAS_TRAIT(src, TRAIT_UNDERFLOOR) ? "/hidden" : "/visible"
+		var/visible_path = is_hidden ? "/hidden" : "/visible"
 
 		var/layer_path = ""
 		if(piping_layer != 3)
