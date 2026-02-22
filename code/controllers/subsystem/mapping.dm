@@ -152,6 +152,7 @@ SUBSYSTEM_DEF(mapping)
 	*/
 	// TGP EDIT REMOVAL END
 	// TGP EDIT ADDITION START - Persistent subsystem
+#ifndef UNIT_TESTS
 	var/list/persistent_save_z_levels = CONFIG_GET(keyed_list/persistent_save_z_levels)
 
 	if(CONFIG_GET(flag/persistent_save_enabled) && persistent_save_z_levels[ZTRAIT_SPACE_RUINS] && SSworld_save.map_configs_cache?[ZTRAIT_SPACE_RUINS])
@@ -201,10 +202,17 @@ SUBSYSTEM_DEF(mapping)
 
 			INIT_ANNOUNCE("Loading persistent z-level [persistent_map.map_name]...")
 			LoadGroup(FailedZs, persistent_map.map_name, persistent_map.map_path, persistent_map.map_file, persistent_map.traits, null, height_autosetup = persistent_map.height_autosetup)
+#endif
 	// TGP EDIT ADDITION END
 
 	// Pick a random away mission.
+//tgp edit start
+#ifdef UNIT_TESTS
+	if(CONFIG_GET(flag/roundstart_away))
+#else
 	else if(CONFIG_GET(flag/roundstart_away)) // TGP EDIT - Original - if(CONFIG_GET(flag/roundstart_away))
+#endif
+//tgp edit end
 		createRandomZlevel(prob(CONFIG_GET(number/config_gateway_chance)))
 
 	else if (SSmapping.current_map.load_all_away_missions) // we're likely in a local testing environment, so punch it.

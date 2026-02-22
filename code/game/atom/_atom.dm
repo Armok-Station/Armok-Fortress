@@ -195,6 +195,10 @@
 		DREAMLUAU_CLEAR_REF_USERDATA(underlays)
 #endif
 
+#ifdef UNIT_TESTS
+	SSatoms.world_save_loaders -= src
+#endif
+
 	return ..()
 
 /atom/proc/handle_ricochet(obj/projectile/ricocheting_projectile)
