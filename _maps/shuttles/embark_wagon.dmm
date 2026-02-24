@@ -1,0 +1,94 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/template_noop,
+/area/template_noop)
+"af" = (
+/obj/structure/railing/wooden_fence{
+	dir = 10
+	},
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"ag" = (
+/obj/structure/railing/wooden_fence,
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"ah" = (
+/obj/structure/railing/wooden_fence{
+	dir = 6
+	},
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"ap" = (
+/obj/docking_port/mobile/arrivals{
+	dir = 2;
+	name = "embark wagon"
+	},
+/turf/closed/wall/mineral/wood,
+/area/shuttle/arrival)
+"au" = (
+/obj/structure/railing/wooden_fence{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"aN" = (
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"aO" = (
+/obj/structure/curtain/cloth/fancy,
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"aT" = (
+/obj/structure/chair/wood,
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"aZ" = (
+/obj/structure/railing/wooden_fence{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/shuttle/arrival)
+"uH" = (
+/turf/closed/wall/mineral/wood,
+/area/shuttle/arrival)
+
+(1,1,1) = {"
+uH
+uH
+aO
+au
+af
+aa
+"}
+(2,1,1) = {"
+uH
+aT
+aN
+aT
+aT
+af
+"}
+(3,1,1) = {"
+ap
+aT
+aN
+aN
+aN
+ag
+"}
+(4,1,1) = {"
+uH
+aT
+aN
+aT
+aT
+ah
+"}
+(5,1,1) = {"
+uH
+uH
+aO
+aZ
+ah
+aa
+"}
