@@ -6839,6 +6839,7 @@
 #include "interface\fonts\spess_font.dm"
 #include "interface\fonts\tiny_unicode.dm"
 #include "interface\fonts\vcr_osd_mono.dm"
+#include "modular_armok\code\modules\language\_language.dm"
 #include "modular_armok\code\modules\language\dwarf.dm"
 #include "modular_armok\code\modules\language\language_holder.dm"
 #include "modular_armok\code\modules\mob\living\carbon\human\species_type\dwarf.dm"
