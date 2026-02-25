@@ -2,8 +2,9 @@
 	name = "Dwarven"
 	desc = "The common language of dwarven civilization."
 	key = "d"
-	icon_state = "galcom"
-	flags = TONGUELESS_SPEECH
+	icon = 'modular_armok/icons/ui/chat/df_language.dmi'
+	icon_state = "dwarf"
+	flags = TONGUELESS_SPEECH|LANGUAGE_HIDE_ICON_IF_NATIVE_SPEAKER
 	syllables = list(
 		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",
 		"ha", "ah", "he", "eh", "hi", "ih", "ho", "oh", "hu", "uh", "hs", "sh",
