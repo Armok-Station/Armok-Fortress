@@ -12,6 +12,7 @@
 	species_language_holder = /datum/language_holder/dwarf
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	payday_modifier = 1.1
+	mutanttongue = /obj/item/organ/tongue/dwarf
 
 /datum/species/dwarf/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.set_haircolor("#0f0f0b")
