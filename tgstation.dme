@@ -420,6 +420,7 @@
 #include "code\__DEFINES\traits\declarations.dm"
 #include "code\__DEFINES\traits\macros.dm"
 #include "code\__DEFINES\traits\sources.dm"
+#include "code\__DEFINES\~armok_defines\language.dm"
 #include "code\__DEFINES\~armok_defines\species.dm"
 #include "code\__DEFINES\~armok_defines\traits\declarations.dm"
 #include "code\__DEFINES\~tgp_defines\map_exporter.dm"
