@@ -210,15 +210,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 /proc/generate_selectable_species_and_languages()
 	var/list/selectable_species = list()
 
-	/* ARMOK EDIT START
 	for(var/species_type in subtypesof(/datum/species))
 		var/datum/species/species = GLOB.species_prototypes[species_type]
 		if(species.check_roundstart_eligible())
 			selectable_species += species.id
+	// ARMOK EDIT START
+			/*
 			var/datum/language_holder/temp_holder = GLOB.prototype_language_holders[species.species_language_holder]
 			for(var/datum/language/spoken_language as anything in temp_holder.understood_languages)
 				GLOB.uncommon_roundstart_languages |= spoken_language
-	*/
+			*/
 
 	for(var/datum/language/df_language as anything in GLOB.dwarf_fortress_roundstart_languages)
 		GLOB.uncommon_roundstart_languages |= df_language
