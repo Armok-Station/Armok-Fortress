@@ -1,4 +1,4 @@
-/datum/language/dwarf
+/datum/language/dwarven
 	name = "Dwarven"
 	desc = "The common language of dwarven civilization."
 	key = "d"

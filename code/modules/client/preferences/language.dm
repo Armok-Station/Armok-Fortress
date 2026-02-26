@@ -31,21 +31,13 @@
 		generate_selectable_species_and_languages()
 
 	values += "Random"
-	/* ARMOK EDIT BEGIN
 	//we add uncommon as it's foreigner-only.
-	values += /datum/language/uncommon::name
+	//values += /datum/language/uncommon::name ARMOK EDIT REMOVAL
 
 	for(var/datum/language/language_type as anything in GLOB.uncommon_roundstart_languages)
 		if(initial(language_type.name) in values)
 			continue
 		values += initial(language_type.name)
-	*/
-
-	for(var/datum/language/language_type as anything in GLOB.dwarf_fortress_roundstart_languages)
-		if(initial(language_type.name) in values)
-			continue
-		values += initial(language_type.name)
-	// ARMOK EDIT END
 
 	return values
 

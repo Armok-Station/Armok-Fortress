@@ -1,7 +1,7 @@
 /datum/language_holder/dwarf
 	understood_languages = list(
-		/datum/language/dwarf = list(LANGUAGE_ATOM),
+		/datum/language/dwarven = list(LANGUAGE_ATOM),
 	)
 	spoken_languages = list(
-		/datum/language/dwarf = list(LANGUAGE_ATOM),
+		/datum/language/dwarven = list(LANGUAGE_ATOM),
 	)
