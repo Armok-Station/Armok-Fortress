@@ -22,6 +22,36 @@
 	human.set_facial_haircolor("#251d10")
 	human.update_body(is_creating = TRUE)
 
+/datum/species/dwarf/on_species_gain(mob/living/carbon/human/new_dwarf, datum/species/old_species, pref_load, regenerate_icons)
+	. = ..()
+	if(!ishuman(new_dwarf))
+		return
+
+	RegisterSignal(new_dwarf, COMSIG_LIVING_HAIR_UPDATE, PROC_REF(update_beard_status))
+
+/datum/species/dwarf/on_species_loss(mob/living/carbon/human/former_dwarf, datum/species/new_species, pref_load)
+	UnregisterSignal(former_dwarf, list(
+		COMSIG_LIVING_HAIR_UPDATE,
+	))
+	return ..()
+
+/datum/mood_event/beard_lost
+	description = "I feel naked and ashamed. My ancestors are surely judging my smooth, pathetic chin."
+	mood_change = -2
+
+/datum/species/dwarf/proc/update_beard_status(mob/living/carbon/human/dwarf, old_style, new_style)
+	SIGNAL_HANDLER
+
+	var/beard_was_removed = (old_style in SSaccessories.facial_hairstyles_dwarf_list) && !(new_style in SSaccessories.facial_hairstyles_dwarf_list)
+	var/beard_was_gained = !(old_style in SSaccessories.facial_hairstyles_dwarf_list) && (new_style in SSaccessories.facial_hairstyles_dwarf_list)
+
+	if(beard_was_gained)
+		to_chat(dwarf, span_notice("The weight of your ancestors returns to your chin. Your honor is restored."))
+		dwarf.clear_mood_event("beard_lost")
+	else if(beard_was_removed)
+		to_chat(dwarf, span_boldwarning("Disaster! Your beard has been shorn! You feel a deep, ancestral shame."))
+		dwarf.add_mood_event("beard_lost", /datum/mood_event/beard_lost)
+
 /datum/species/dwarf/get_physical_attributes()
 	return "A short, sturdy creature fond of drink and industry."
 
