@@ -15,26 +15,6 @@
 	payday_modifier = 1.1
 	mutanttongue = /obj/item/organ/tongue/dwarf
 
-// This is used to create a list of facial hair preferences on character creation
-// that dwarves are restricted too (forcing them to pick a large beard)
-/datum/sprite_accessory/facial_hair/vlongbeard
-	species = SPECIES_DWARF
-
-/datum/sprite_accessory/facial_hair/martialartist
-	species = SPECIES_DWARF
-
-/datum/sprite_accessory/facial_hair/moonshiner
-	species = SPECIES_DWARF
-
-/datum/sprite_accessory/facial_hair/longbeard
-	species = SPECIES_DWARF
-
-/datum/sprite_accessory/facial_hair/brokenman
-	species = SPECIES_DWARF
-
-/datum/sprite_accessory/facial_hair/dwarf
-	species = SPECIES_DWARF
-
 /datum/species/dwarf/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.set_haircolor("#0f0f0b")
 	human.set_hairstyle("Braid (Low)")
