@@ -58,8 +58,14 @@
 	should_generate_icons = TRUE
 	relevant_head_flag = HEAD_FACIAL_HAIR
 
-/datum/preference/choiced/facial_hairstyle/init_possible_values()
-	return assoc_to_keys_features(SSaccessories.facial_hairstyles_list)
+/datum/preference/choiced/facial_hairstyle/init_possible_values(datum/preferences/preferences)
+	var/datum/species/species = preferences.read_preference(/datum/preference/choiced/species)
+	switch(species.id)
+		if(SPECIES_DWARF)
+			return assoc_to_keys_features(SSaccessories.facial_hairstyles_dwarf_list)
+		//if(SPECIES_ELF) TODO later restrict elves to be beardless
+		else
+			return assoc_to_keys_features(SSaccessories.facial_hairstyles_list)
 
 /datum/preference/choiced/facial_hairstyle/icon_for(value)
 	return generate_icon_with_head_accessory(SSaccessories.facial_hairstyles_list[value])
@@ -77,7 +83,7 @@
 	if(!gender || !species_real || !species_real.sexes)
 		return ..()
 
-	var/picked_beard = random_facial_hairstyle(gender)
+	var/picked_beard = random_facial_hairstyle(gender, species_type) // ARMOK EDIT
 	var/datum/sprite_accessory/beard_style = SSaccessories.facial_hairstyles_list[picked_beard]
 	if(!beard_style || !beard_style.natural_spawn || beard_style.locked) // Invalid, go with god(bald)
 		return ..()
