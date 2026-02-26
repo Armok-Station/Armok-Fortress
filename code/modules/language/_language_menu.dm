@@ -28,7 +28,7 @@
 	data["languages"] = list()
 	for(var/datum/language/language as anything in GLOB.all_languages)
 		// ARMOK ADDITION BEGIN
-		if(!language.is_df_language)
+		if(!(language in GLOB.dwarf_fortress_roundstart_languages))
 			continue
 		// ARMOK ADDITION END
 
