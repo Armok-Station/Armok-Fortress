@@ -1,5 +1,6 @@
 /datum/species/dwarf
 	name = "\improper Dwarf"
+	plural_form = "Dwarves"
 	id = SPECIES_DWARF
 	inherent_traits = list(
 		TRAIT_USES_SKINTONES,
