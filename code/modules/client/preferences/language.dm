@@ -45,6 +45,7 @@
 		if(initial(language_type.name) in values)
 			continue
 		values += initial(language_type.name)
+	// ARMOK EDIT END
 
 	return values
 
