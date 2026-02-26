@@ -1954,6 +1954,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		return // You're boring
 
 	var/list/to_add = list()
+	/* ARMOK EDIT BEGIN
 	if(common_language in basic_holder.spoken_languages)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
@@ -1969,6 +1970,14 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			SPECIES_PERK_NAME = "Foreign Speaker",
 			SPECIES_PERK_DESC = "[plural_form] may not speak [initial(common_language.name)], but they can speak [english_list(bonus_languages)].",
 		))
+	*/
+	to_add += list(list(
+		SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+		SPECIES_PERK_ICON = "comment",
+		SPECIES_PERK_NAME = "Native Speaker",
+		SPECIES_PERK_DESC = "[plural_form] gain the ability to speak [english_list(bonus_languages)].",
+	))
+	// ARMOK EDIT END
 
 	return to_add
 
