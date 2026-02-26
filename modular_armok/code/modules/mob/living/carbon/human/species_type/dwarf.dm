@@ -7,12 +7,33 @@
 		TRAIT_ALCOHOL_TOLERANCE,
 		TRAIT_HEAVY_DRINKER,
 		TRAIT_NIGHT_VISION,
+		TRAIT_DWARVEN_BEARD,
 	)
 	skinned_type = /obj/item/stack/sheet/animalhide/carbon/human
 	species_language_holder = /datum/language_holder/dwarf
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	payday_modifier = 1.1
 	mutanttongue = /obj/item/organ/tongue/dwarf
+
+// This is used to create a list of facial hair preferences on character creation
+// that dwarves are restricted too (forcing them to pick a large beard)
+/datum/sprite_accessory/facial_hair/vlongbeard
+	species = SPECIES_DWARF
+
+/datum/sprite_accessory/facial_hair/martialartist
+	species = SPECIES_DWARF
+
+/datum/sprite_accessory/facial_hair/moonshiner
+	species = SPECIES_DWARF
+
+/datum/sprite_accessory/facial_hair/longbeard
+	species = SPECIES_DWARF
+
+/datum/sprite_accessory/facial_hair/brokenman
+	species = SPECIES_DWARF
+
+/datum/sprite_accessory/facial_hair/dwarf
+	species = SPECIES_DWARF
 
 /datum/species/dwarf/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.set_haircolor("#0f0f0b")
@@ -51,6 +72,13 @@
 			SPECIES_PERK_DESC = "Dwarves can see slightly more clearly in full darkness.",
 		),
 		list(
+			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+			SPECIES_PERK_ICON = FA_ICON_MOON,
+			SPECIES_PERK_NAME = "Masterwork Beard",
+			SPECIES_PERK_DESC = "Dwarves beards are their pride, joy, and history. \
+				To be clean-shaven is to be a dwarf without a past, leading to profound melancholy.",
+		),
+		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = FA_ICON_BEER,
 			SPECIES_PERK_NAME = "Alcoholic",
@@ -72,3 +100,4 @@
 	)
 
 	return to_add
+
