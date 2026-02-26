@@ -22,7 +22,7 @@
 	if(wanted_language == "Random")
 		language_type = pick(GLOB.dwarf_fortress_roundstart_languages) // ARMOK EDIT
 	else if(wanted_language)
-		language_type = GLOB.language_types_by_name[wanted_language]
+		language_type = GLOB.dwarf_fortress_roundstart_languages[wanted_language] // ARMOK EDIT
 	if(!language_type || quirk_holder.has_language(language_type))
 		language_type = /datum/language/uncommon
 		if(quirk_holder.has_language(language_type))
