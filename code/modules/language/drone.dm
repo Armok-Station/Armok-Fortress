@@ -2,7 +2,7 @@
 	name = "Drone"
 	desc = "A heavily encoded damage control coordination stream, with special flags for hats."
 	spans = list(SPAN_ROBOT)
-	key = "d"
+	key = "z" // ARMOK EDIT (d is used for dwarf language)
 	flags = NO_STUTTER
 	syllables = list(".", "|")
 	// ...|..||.||||.|.||.|.|.|||.|||

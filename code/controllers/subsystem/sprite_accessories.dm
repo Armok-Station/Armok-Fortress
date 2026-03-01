@@ -4,6 +4,10 @@
 #define MALE_SPRITE_LIST "male_sprites"
 /// The female specific list that we get from init_sprite_accessory_subtypes()
 #define FEMALE_SPRITE_LIST "female_sprites"
+// ARMOK ADDITION START
+/// The species specific list that we get from init_sprite_accessory_subtypes()
+#define DWARF_SPRITE_LIST "dwarf_sprites"
+// ARMOK ADDITION END
 
 /// Use this to init a sprite accessory list for a feature where mobs are required to have one selected
 #define INIT_ACCESSORY(sprite_accessory) init_sprite_accessory_subtypes(sprite_accessory, add_blank = FALSE)[DEFAULT_SPRITE_LIST]
@@ -24,6 +28,7 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/list/facial_hairstyles_list //! stores /datum/sprite_accessory/facial_hair indexed by name
 	var/list/facial_hairstyles_male_list //! stores only hair names
 	var/list/facial_hairstyles_female_list //! stores only hair names
+	var/list/facial_hairstyles_dwarf_list //! storers only dwarf beard names // ARMOK ADDITION
 	var/list/hair_gradients_list //! stores /datum/sprite_accessory/hair_gradient indexed by name
 	var/list/facial_hair_gradients_list //! stores /datum/sprite_accessory/facial_hair_gradient indexed by name
 	var/list/hair_masks_list //! stores /datum/hair_mask indexed by type
@@ -62,6 +67,8 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	var/facial_hair_lists = init_sprite_accessory_subtypes(/datum/sprite_accessory/facial_hair)
 	facial_hairstyles_list = facial_hair_lists[DEFAULT_SPRITE_LIST]
 	facial_hairstyles_male_list = facial_hair_lists[MALE_SPRITE_LIST]
+	facial_hairstyles_dwarf_list = facial_hair_lists[DWARF_SPRITE_LIST] // ARMOK ADDITION
+
 	facial_hairstyles_female_list = facial_hair_lists[FEMALE_SPRITE_LIST]
 
 	var/underwear_lists = init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear)
@@ -127,6 +134,7 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 		DEFAULT_SPRITE_LIST = list(),
 		MALE_SPRITE_LIST = list(),
 		FEMALE_SPRITE_LIST = list(),
+		DWARF_SPRITE_LIST = list(), // ARMOK ADDITION
 	)
 
 	for(var/path in subtypesof(prototype))
@@ -145,6 +153,10 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 			else
 				returnable_list[MALE_SPRITE_LIST] += accessory.name
 				returnable_list[FEMALE_SPRITE_LIST] += accessory.name
+
+		switch(accessory.species)
+			if(SPECIES_DWARF)
+				returnable_list[DWARF_SPRITE_LIST] += accessory.name
 
 	if(add_blank)
 		returnable_list[DEFAULT_SPRITE_LIST][SPRITE_ACCESSORY_NONE] = new /datum/sprite_accessory/blank

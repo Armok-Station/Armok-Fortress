@@ -214,9 +214,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		var/datum/species/species = GLOB.species_prototypes[species_type]
 		if(species.check_roundstart_eligible())
 			selectable_species += species.id
+	// ARMOK EDIT START
+			/*
 			var/datum/language_holder/temp_holder = GLOB.prototype_language_holders[species.species_language_holder]
 			for(var/datum/language/spoken_language as anything in temp_holder.understood_languages)
 				GLOB.uncommon_roundstart_languages |= spoken_language
+			*/
+
+	for(var/datum/language/df_language as anything in GLOB.dwarf_fortress_roundstart_languages)
+		GLOB.uncommon_roundstart_languages |= df_language
+	// ARMOK EDIT END
 
 	GLOB.uncommon_roundstart_languages -= /datum/language/common
 	if(!selectable_species.len)
@@ -1948,6 +1955,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		return // You're boring
 
 	var/list/to_add = list()
+	/* ARMOK EDIT BEGIN
 	if(common_language in basic_holder.spoken_languages)
 		to_add += list(list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
@@ -1963,6 +1971,14 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			SPECIES_PERK_NAME = "Foreign Speaker",
 			SPECIES_PERK_DESC = "[plural_form] may not speak [initial(common_language.name)], but they can speak [english_list(bonus_languages)].",
 		))
+	*/
+	to_add += list(list(
+		SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+		SPECIES_PERK_ICON = "comment",
+		SPECIES_PERK_NAME = "Native Speaker",
+		SPECIES_PERK_DESC = "[plural_form] gain the ability to speak [english_list(bonus_languages)].",
+	))
+	// ARMOK EDIT END
 
 	return to_add
 

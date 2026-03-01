@@ -117,6 +117,17 @@
 		return FALSE
 	if((flags & LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD) && !understands)
 		return FALSE
+	// ARMOK ADDITION START
+	// checks if your tongue is a native speaker of the language and if so it hides the icon
+	if(isliving(hearer))
+		var/mob/living/listener = hearer
+		var/obj/item/organ/tongue/tongue = listener.get_organ_by_type(/obj/item/organ/tongue)
+
+		if(length(tongue?.languages_native) > 0)
+			if((tongue.languages_native & src.type) && (flags & LANGUAGE_HIDE_ICON_IF_NATIVE_SPEAKER))
+				return FALSE
+
+	// ARMOK ADDITION END
 	return TRUE
 
 /// Returns the icon to display in the chat window when speaking this language.

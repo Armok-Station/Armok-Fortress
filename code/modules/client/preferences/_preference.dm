@@ -379,24 +379,24 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 /// Return value can be in the form of:
 /// - A flat list of raw values, such as list(MALE, FEMALE, PLURAL).
 /// - An assoc list of raw values to atoms/icons.
-/datum/preference/choiced/proc/get_choices()
+/datum/preference/choiced/proc/get_choices(datum/preferences/preferences) // ARMOK EDIT
 	// Override `init_values()` instead.
 	SHOULD_NOT_OVERRIDE(TRUE)
 
 	if (isnull(cached_values))
-		cached_values = init_possible_values()
+		cached_values = init_possible_values(preferences) // ARMOK EDIT
 		ASSERT(cached_values.len)
 
 	return cached_values
 
 /// Returns a list of every possible value, serialized.
-/datum/preference/choiced/proc/get_choices_serialized()
+/datum/preference/choiced/proc/get_choices_serialized(datum/preferences/preferences) // ARMOK EDIT
 	// Override `init_values()` instead.
 	SHOULD_NOT_OVERRIDE(TRUE)
 
 	var/list/serialized_choices = list()
 
-	for (var/choice in get_choices())
+	for (var/choice in get_choices(preferences)) // ARMOK EDIT
 		serialized_choices += serialize(choice)
 
 	return serialized_choices
@@ -405,7 +405,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 /// This must be overriden by `/datum/preference/choiced` subtypes.
 /// If `should_generate_icons` is TRUE, then you will also need to implement `icon_for(value)`
 /// for every possible value.
-/datum/preference/choiced/proc/init_possible_values()
+/datum/preference/choiced/proc/init_possible_values(datum/preferences/preferences) // ARMOK EDIT
 	CRASH("`init_possible_values()` was not implemented for [type]!")
 
 /// When `should_generate_icons` is TRUE, this proc is called for every value.
@@ -419,7 +419,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 	return value in get_choices()
 
 /datum/preference/choiced/deserialize(input, datum/preferences/preferences)
-	return sanitize_inlist(input, get_choices(), create_default_value())
+	return sanitize_inlist(input, get_choices(preferences), create_default_value()) // ARMOK EDIT
 
 /datum/preference/choiced/create_default_value()
 	return pick(get_choices())

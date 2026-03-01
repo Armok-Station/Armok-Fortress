@@ -27,6 +27,11 @@
 	var/list/partial_languages = speaker?.get_partially_understood_languages()
 	data["languages"] = list()
 	for(var/datum/language/language as anything in GLOB.all_languages)
+		// ARMOK ADDITION BEGIN
+		if(!(language in GLOB.dwarf_fortress_roundstart_languages))
+			continue
+		// ARMOK ADDITION END
+
 		var/list/lang_data = list()
 
 		lang_data["name"] = initial(language.name)
