@@ -246,8 +246,12 @@ GLOBAL_LIST_INIT(dwarf_surname_words, world.file2list("strings/names/dwarf_surna
 
 /obj/item/organ/eyes/dwarf
 	name = "dwarven eyes"
+	desc = "A pair of eyes adapted to the perpetual darkness of underground fortresses. \
+		They grant minor vision in dim conditions."
 	organ_traits = list(TRAIT_MINOR_NIGHT_VISION)
 
 /obj/item/organ/liver/dwarf
 	name = "dwarven liver"
+	desc = "An incredibly robust liver, hardened by generations of legendary drinking. \
+		It processes alcohol with remarkable efficiency."
 	organ_traits = list(TRAIT_ALCOHOL_TOLERANCE)
