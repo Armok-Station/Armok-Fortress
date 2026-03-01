@@ -194,7 +194,7 @@ GLOBAL_LIST_INIT(dwarf_surname_words, world.file2list("strings/names/dwarf_surna
 
 /obj/item/organ/tongue/dwarf
 	name = "dwarven tongue"
-	desc = "A thick, calloused tongue hardened by years of strong ale and hot forge-smoke.
+	desc = "A thick, calloused tongue hardened by years of strong ale and hot forge-smoke."
 	organ_traits = list(TRAIT_SPEAKS_CLEARLY)
 	modifies_speech = TRUE
 	liked_foodtypes = ALCOHOL | MEAT | DAIRY | GRAIN
