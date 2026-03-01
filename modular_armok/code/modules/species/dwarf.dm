@@ -255,3 +255,4 @@ GLOBAL_LIST_INIT(dwarf_surname_words, world.file2list("strings/names/dwarf_surna
 	desc = "An incredibly robust liver, hardened by generations of legendary drinking. \
 		It processes alcohol with remarkable efficiency."
 	organ_traits = list(TRAIT_ALCOHOL_TOLERANCE)
+	alcohol_tolerance = ALCOHOL_RATE * 0.75
