@@ -38,6 +38,8 @@
 	UnregisterSignal(former_dwarf, list(
 		COMSIG_LIVING_HAIR_UPDATE,
 	))
+
+	former_dwarf.clear_mood_event("beard_lost")
 	return ..()
 
 /datum/mood_event/beard_lost
@@ -63,7 +65,7 @@
 /datum/species/dwarf/get_species_description()
 	return "They are well known for their stout physique and prominent beards (on the males), \
 	which begin to grow from birth; dwarves are stronger, shorter, stockier, and hairier than the average human, \
-	have a heightened sense of their surroundings and possess perfect darkvision."
+	have a heightened sense of their surroundings."
 
 /datum/species/dwarf/get_species_lore()
 	return list(
@@ -89,7 +91,7 @@
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
-			SPECIES_PERK_ICON = FA_ICON_MOON,
+			SPECIES_PERK_ICON = FA_ICON_FIST_RAISED,
 			SPECIES_PERK_NAME = "Masterwork Beard",
 			SPECIES_PERK_DESC = "Dwarves beards are their pride, joy, and history. \
 				To be clean-shaven is to be a dwarf without a past, leading to profound melancholy.",
@@ -98,8 +100,7 @@
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = FA_ICON_BEER,
 			SPECIES_PERK_NAME = "Alcoholic",
-			SPECIES_PERK_DESC = "A dwarf needs alcohol to get through the working day. \
-				They become drunk more slowly and suffer fewer drawbacks from alcohol.",
+			SPECIES_PERK_DESC = "A dwarf needs alcohol to get through the working day.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
@@ -122,7 +123,7 @@
 	icon = 'modular_armok/icons/ui/chat/df_language.dmi'
 	icon_state = "dwarf"
 	flags = TONGUELESS_SPEECH|LANGUAGE_HIDE_ICON_IF_NATIVE_SPEAKER
-	default_priority = 90
+	default_priority = 100
 	// TODO: Add mutual understanding with elf/human languages
 	// mutual_understanding = list(
 	// 	/datum/language/elven = 20,
