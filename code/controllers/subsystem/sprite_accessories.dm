@@ -169,3 +169,4 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 #undef DEFAULT_SPRITE_LIST
 #undef MALE_SPRITE_LIST
 #undef FEMALE_SPRITE_LIST
+#undef DWARF_SPRITE_LIST // ARMOK ADDITION
