@@ -59,6 +59,9 @@
 	relevant_head_flag = HEAD_FACIAL_HAIR
 
 /datum/preference/choiced/facial_hairstyle/init_possible_values(datum/preferences/preferences)
+	if(isnull(preferences))
+		return assoc_to_keys_features(SSaccessories.facial_hairstyles_list)
+
 	var/datum/species/species = preferences.read_preference(/datum/preference/choiced/species)
 	switch(species.id)
 		if(SPECIES_DWARF)
