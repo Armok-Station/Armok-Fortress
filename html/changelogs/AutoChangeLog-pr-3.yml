@@ -1,0 +1,4 @@
+author: "timothymtorres"
+delete-after: True
+changes:
+  - rscadd: "Add dwarf race, with included dwarven language. Dwarves are restricted to selecting long beards for their facial hair pref menu. They will also become unhappy if they lose their beards during gameplay."
