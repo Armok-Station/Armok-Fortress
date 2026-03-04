@@ -418,6 +418,8 @@
 /mob/living/carbon/human/set_facial_hairstyle(new_style, update = TRUE)
 	var/obj/item/bodypart/head/my_head = get_bodypart(BODY_ZONE_HEAD)
 
+	SEND_SIGNAL(src, COMSIG_LIVING_HAIR_UPDATE, facial_hairstyle, new_style)
+
 	facial_hairstyle = new_style
 	my_head?.facial_hairstyle = new_style
 

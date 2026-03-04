@@ -7,7 +7,7 @@
 	human.real_name = human.generate_random_mob_name()
 	human.name = human.get_visible_name()
 	human.set_hairstyle(random_hairstyle(human.gender), update = FALSE)
-	human.set_facial_hairstyle(random_facial_hairstyle(human.gender), update = FALSE)
+	human.set_facial_hairstyle(random_facial_hairstyle(human.gender, human.dna.species.id), update = FALSE) // ARMOK EDIT
 	human.set_haircolor("#[random_color()]", update = FALSE)
 	human.set_facial_haircolor(human.hair_color, update = FALSE)
 	human.set_eye_color(random_eye_color())
@@ -39,7 +39,7 @@
 	var/datum/sprite_accessory/hairstyle = SSaccessories.hairstyles_list[random_hairstyle(human.gender)]
 	if(hairstyle && hairstyle.natural_spawn && !hairstyle.locked)
 		human.set_hairstyle(hairstyle.name, update = FALSE)
-	var/datum/sprite_accessory/facial_hair = SSaccessories.facial_hairstyles_list[random_facial_hairstyle(human.gender)]
+	var/datum/sprite_accessory/facial_hair = SSaccessories.facial_hairstyles_list[random_facial_hairstyle(human.gender, human.dna?.species.id)] // ARMOK EDIT
 	if(facial_hair && facial_hair.natural_spawn && !facial_hair.locked)
 		human.set_facial_hairstyle(facial_hair.name, update = FALSE)
 	// Normal DNA init stuff, these can generally be wacky but we care less, they're aliens after all

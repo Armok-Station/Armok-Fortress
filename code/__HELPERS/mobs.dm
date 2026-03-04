@@ -93,7 +93,13 @@
 		else
 			return pick(SSaccessories.hairstyles_list)
 
-/proc/random_facial_hairstyle(gender)
+/proc/random_facial_hairstyle(gender, species) // ARMOK EDIT
+	// ARMOK ADDITION BEGIN
+	switch(species)
+		if(SPECIES_DWARF)
+			return pick(SSaccessories.facial_hairstyles_dwarf_list)
+	// ARMOK ADDITION END
+
 	switch(gender)
 		if(MALE)
 			return pick(SSaccessories.facial_hairstyles_male_list)

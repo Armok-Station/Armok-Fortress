@@ -71,6 +71,10 @@
 		. = FALSE
 	else if((ride_check_flags & JUST_FRIEND_RIDERS) && !(living_parent.has_ally(rider)))
 		. = FALSE
+	// ARMOK ADD START
+	else if(HAS_TRAIT(rider, TRAIT_DWARF))
+		. = FALSE
+	// ARMOK ADD END
 
 	if(. || !consequences)
 		return
